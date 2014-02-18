@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>Controlador</servlet-name>
+        <servlet-class>com.udec.controlador.Controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cargar</servlet-name>
+        <servlet-class>com.udec.controlador.Cargar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Subir</servlet-name>
+        <servlet-class>com.udec.controlador.Subir</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>borrar</servlet-name>
+        <servlet-class>com.udec.controlador.borrar</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controlador</servlet-name>
+        <url-pattern>/Controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cargar</servlet-name>
+        <url-pattern>/Cargar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Subir</servlet-name>
+        <url-pattern>/Subir</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>borrar</servlet-name>
+        <url-pattern>/borrar</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
