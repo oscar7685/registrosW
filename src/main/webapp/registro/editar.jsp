@@ -20,6 +20,24 @@
         $('#inicio').datepicker({
             format: 'dd/mm/yyyy'
         });
+        $('#inicioUno').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#inicioDos').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#finaUno').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#finaDos').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#presentacionAuto').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('#radicacion').datepicker({
+            format: 'dd/mm/yyyy'
+        });
         $("#formEditarRegistro").validate({
             submitHandler: function() {
                 $.ajax({
@@ -45,51 +63,103 @@
                     Editar
                 </li>
             </ul>
+
             <form id="formEditarRegistro" class="form-horizontal" method="post">
                 <fieldset>
                     <legend>Editar Registro</legend>
-                    <div class="control-group">
-                        <label for="resolucion" class="control-label">Resolucion</label>
-                        <div class="controls">
-                            <input type="text" name="resolucion" id="resolucion" class="input-xlarge {required:true}" value="${registro.resolucion}"/>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="resolucion" class="col-xs-4 control-label">Resolucion</label>
+                            <div class="col-xs-8">
+                                <textarea name="resolucion" class="form-control {required:true}" id="resolucion" rows="2">${registro.resolucion}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inicio" class="col-xs-4 control-label">Fecha Inicio</label>
+                            <div class="col-xs-8">
+                                <input type="text" name="inicio" id="inicio" class="input-xlarge {required:true}" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.fechaInicio}' />" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="duracion" class="col-xs-4 control-label">Duracion (A&nacute;os)</label>
+                            <div class="col-xs-8">
+                                <input type="text" name="duracion" id="duracion" class="input-xlarge {required:true}" value="${registro.duracion}"/>
+                            </div>
+                        </div>    
+                        <div class="form-group">
+                            <label for="programa" class="col-xs-4 control-label">Programa</label>
+                            <div class="col-xs-8">
+                                <select id="programa" name="programa" class="{required:true}">
+                                    <option value=""></option>    
+                                    <c:forEach items="${listaP}" var="row" varStatus="iter">
+                                        <c:choose>
+                                            <c:when test="${row != registro.programaIdprograma}">
+                                                <option value="${row.idprograma}">${row.nombre}</option>    
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option selected="selected" value="${row.idprograma}">${row.nombre}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </select>                
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="col-xs-8">
+                        <fieldset><legend style="text-align: center;">Fechas para seguimiento de renovaci&oacute;n del registro calificado</legend></fieldset>
+                        
+                        <div class="col-xs-4 bordeado">
+                            <div class="form-group">
+                                <label for="inicioUno" class="col-xs-6 control-label">Inicio 1ra Autoevaluaci&oacute;n</label>
+                                <div class="col-xs-6">
+                                     <input type="text" name="inicioUno" id="inicioUno" class="form-control" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.inicioUno}' />" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="finaUno" class="col-xs-6 control-label">Final 1ra Autoevaluaci&oacute;n</label>
+                                <div class="col-xs-6">
+                                    <input type="text" name="finaUno" id="finaUno" class="form-control" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.finaUno}' />" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 bordeado">
+                            <div class="form-group">
+                                <label for="inicioDos" class="col-xs-6 control-label">Inicio 2da Autoevaluaci&oacute;n</label>
+                                <div class="col-xs-6">
+                                    <input type="text" name="inicioDos" id="inicioDos" class="form-control" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.inicioDos}' />" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="finaDos" class="col-xs-6 control-label">Final 2da Autoevaluaci&oacute;n</label>
+                                <div class="col-xs-6">
+                                    <input type="text" name="finaDos" id="finaDos" class="form-control" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.finaDos}' />" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 bordeado">
+                            <div class="form-group">
+                                <label for="presentacionAuto" class="col-xs-6 control-label">Presentación Centro Autoevaluaci&oacute;n</label>
+                                <div class="col-xs-6">
+                                    <input type="text" name="presentacionAuto" id="presentacionAuto" class="form-control" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.presentacionAuto}' />" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="radicacion" class="col-xs-6 control-label">Radicación</label>
+                                <div class="col-xs-6">
+                                    <input type="text" name="radicacion" id="radicacion" class="form-control" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.radicacion}' />" >
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label for="inicio" class="control-label">Fecha Inicio</label>
-                        <div class="controls">
-                            <input type="text" name="inicio" id="inicio" class="input-xlarge {required:true}" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${registro.fechaInicio}' />" >
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="duracion" class="control-label">Duracion</label>
-                        <div class="controls">
-                            <input type="text" name="duracion" id="duracion" class="input-xlarge {required:true}" value="${registro.duracion}"/>
-                        </div>
-                    </div>    
-                    <div class="control-group">
-                        <label for="programa" class="control-label">Programa</label>
-                        <div class="controls">
-                            <select id="programa" name="programa" class="{required:true}">
-                                <option value=""></option>    
-                                <c:forEach items="${listaP}" var="row" varStatus="iter">
-                                    <c:choose>
-                                        <c:when test="${row != registro.programaIdprograma}">
-                                            <option value="${row.idprograma}">${row.nombre}</option>    
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option selected="selected" value="${row.idprograma}">${row.nombre}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            </select>                
-                        </div>
-                    </div>
-                    <div class="form-actions">
+
+                    <div class="col-xs-10 form-actions">
                         <button class="btn btn-primary" type="submit">Guardar cambios</button>
                         <button class="btn" type="reset">Cancelar</button>
                     </div>
                 </fieldset>
             </form>
+
+
             <br/>           
             <form id="fileupload" action="Subir" method="POST" enctype="multipart/form-data">
                 <fieldset>
@@ -150,78 +220,78 @@
 </div>
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
+    {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
-        <td>
-            <span class="preview"></span>
-        </td>
-        <td>
-            <p class="name">{%=file.name%}</p>
-            <strong class="error text-danger"></strong>
-        </td>
-        <td>
-            <p class="size">Processing...</p>
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-        </td>
-        <td>
-            {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-primary start" disabled>
-                    <i class="glyphicon glyphicon-upload"></i>
-                    <span>Subir</span>
-                </button>
-            {% } %}
-            {% if (!i) { %}
-                <button class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancelar</span>
-                </button>
-            {% } %}
-        </td>
+    <td>
+    <span class="preview"></span>
+    </td>
+    <td>
+    <p class="name">{%=file.name%}</p>
+    <strong class="error text-danger"></strong>
+    </td>
+    <td>
+    <p class="size">Processing...</p>
+    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+    </td>
+    <td>
+    {% if (!i && !o.options.autoUpload) { %}
+    <button class="btn btn-primary start" disabled>
+    <i class="glyphicon glyphicon-upload"></i>
+    <span>Subir</span>
+    </button>
+    {% } %}
+    {% if (!i) { %}
+    <button class="btn btn-warning cancel">
+    <i class="glyphicon glyphicon-ban-circle"></i>
+    <span>Cancelar</span>
+    </button>
+    {% } %}
+    </td>
     </tr>
-{% } %}
+    {% } %}
 </script>
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
+    {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
-        <td>
-            <span class="preview">
-                {% if (file.thumbnailUrl) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                {% } %}
-            </span>
-        </td>
-        <td>
-            <p class="name">
-                {% if (file.url) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-                {% } else { %}
-                    <span>{%=file.name%}</span>
-                {% } %}
-            </p>
-            {% if (file.error) { %}
-                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-            {% } %}
-        </td>
-        <td>
-            <span class="size">{%=o.formatFileSize(file.size)%}</span>
-        </td>
-        <td>
-            {% if (file.deleteUrl) { %}
-                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-                    <i class="glyphicon glyphicon-trash"></i>
-                    <span>Borrar</span>
-                </button>
-                <input type="checkbox" name="delete" value="1" class="toggle">
-            {% } else { %}
-                <button class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
-                </button>
-            {% } %}
-        </td>
+    <td>
+    <span class="preview">
+    {% if (file.thumbnailUrl) { %}
+    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+    {% } %}
+    </span>
+    </td>
+    <td>
+    <p class="name">
+    {% if (file.url) { %}
+    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+    {% } else { %}
+    <span>{%=file.name%}</span>
+    {% } %}
+    </p>
+    {% if (file.error) { %}
+    <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+    {% } %}
+    </td>
+    <td>
+    <span class="size">{%=o.formatFileSize(file.size)%}</span>
+    </td>
+    <td>
+    {% if (file.deleteUrl) { %}
+    <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+    <i class="glyphicon glyphicon-trash"></i>
+    <span>Borrar</span>
+    </button>
+    <input type="checkbox" name="delete" value="1" class="toggle">
+    {% } else { %}
+    <button class="btn btn-warning cancel">
+    <i class="glyphicon glyphicon-ban-circle"></i>
+    <span>Cancel</span>
+    </button>
+    {% } %}
+    </td>
     </tr>
-{% } %}
+    {% } %}
 </script>
 
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->

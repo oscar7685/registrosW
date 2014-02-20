@@ -15,16 +15,17 @@
             <h3 style="margin: 0;">Listado de  Programas</h3>
             <c:choose>
                 <c:when test="${fn:length(listaP)!= 0}">
-                    <table id="tablaX" class="table table-striped table-bordered table-condensed">
+                    <table id="tablaX2" class="table table-striped table-bordered table-condensed">
                         <thead>
-                        <th>Programa</th>
-                        <th >Registro Calificado</th>
-                        <th >Fecha de Vencimiento</th>
-                        <th >1ra Autoevaluaci&oacute;n</th>
-                        <th >2da Autoevaluaci&oacute;n</th>
-                        <th >Fecha de presentación en el centro de autoevaluaci&oacute;n</th>
-                        <th >Fecha de Radicaci&oacute;n</th>
+                        <th>Programa<input type="text" class="col-lg-10" value="" name="search_engine"></th>
+                        <th >Registro Calificado<input type="text" class="col-lg-10" value="" name="search_browser"></th>
+                        <th >Fecha de Vencimiento<input type="text" class="col-lg-10" value="" name="search_platform"></th>
+                        <th >1ra Autoevaluaci&oacute;n<input type="text" class="col-lg-10" value="" name="search_version"></th>
+                        <th >2da Autoevaluaci&oacute;n<input type="text" class="col-lg-10" value="" name="search_x"></th>
+                        <th >presentación al C. de Autoevaluaci&oacute;n<input type="text" class="col-lg-10" value="" name="search_x1"></th>
+                        <th >Fecha de Radicaci&oacute;n<input type="text" class="col-lg-10" value="" name="search_x2"></th>
                         </thead>
+                        
                         <tbody>
                             <c:forEach items="${listaP}" var="row" varStatus="iter">
                                 <tr>
@@ -64,4 +65,4 @@
         </div>
     </div>
 </div>    
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/dataTable.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/dataTable2.js"></script>

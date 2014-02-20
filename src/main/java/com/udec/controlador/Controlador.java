@@ -182,6 +182,128 @@ public class Controlador extends HttpServlet {
                                                                 sesion.setAttribute("listaP", programaFacade.findAll());
                                                                 RequestDispatcher rd = request.getRequestDispatcher(url);
                                                                 rd.forward(request, response);
+                                                            } else {
+                                                                if (action.equals("editarRegistro2")) {
+                                                                    Registro r = (Registro) sesion.getAttribute("registro");
+                                                                    String resolucion = (String) request.getParameter("resolucion");
+                                                                    String finicio = (String) request.getParameter("inicio");
+                                                                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                                                                    Date fechaI = null;
+                                                                    try {
+
+                                                                        fechaI = formatoDelTexto.parse(finicio);
+
+                                                                    } catch (Exception ex) {
+
+                                                                        ex.printStackTrace();
+
+                                                                    }
+
+                                                                    String duracion = (String) request.getParameter("duracion");
+                                                                    String programa = (String) request.getParameter("programa");
+                                                                    String inicioUno = (String) request.getParameter("inicioUno");
+                                                                    String inicioDos = (String) request.getParameter("inicioDos");
+                                                                    String finaDos = (String) request.getParameter("finaDos");
+                                                                    String finaUno = (String) request.getParameter("finaUno");
+                                                                    String presentacionAuto = (String) request.getParameter("presentacionAuto");
+                                                                    String radicacion = (String) request.getParameter("radicacion");
+
+                                                                    Date inicio_uno = null;
+                                                                    if (!inicioUno.equals("")) {
+                                                                        try {
+
+                                                                            inicio_uno = formatoDelTexto.parse(inicioUno);
+
+                                                                        } catch (Exception ex) {
+
+                                                                            ex.printStackTrace();
+
+                                                                        }
+                                                                    }
+
+                                                                    Date inicio_dos = null;
+                                                                    if (!inicioDos.equals("")) {
+                                                                        try {
+
+                                                                            inicio_dos = formatoDelTexto.parse(inicioDos);
+
+                                                                        } catch (Exception ex) {
+
+                                                                            ex.printStackTrace();
+
+                                                                        }
+                                                                    }
+
+                                                                    Date fina_uno = null;
+                                                                    if (!finaUno.equals("")) {
+                                                                        try {
+
+                                                                            fina_uno = formatoDelTexto.parse(finaUno);
+
+                                                                        } catch (Exception ex) {
+
+                                                                            ex.printStackTrace();
+
+                                                                        }
+                                                                    }
+
+                                                                    Date fina_dos = null;
+                                                                    if (!finaDos.equals("")) {
+                                                                        try {
+
+                                                                            fina_dos = formatoDelTexto.parse(finaDos);
+
+                                                                        } catch (Exception ex) {
+
+                                                                            ex.printStackTrace();
+
+                                                                        }
+                                                                    }
+
+                                                                    Date presentacion_auto = null;
+                                                                    if (!presentacionAuto.equals("")) {
+                                                                        try {
+
+                                                                            presentacion_auto = formatoDelTexto.parse(presentacionAuto);
+
+                                                                        } catch (Exception ex) {
+
+                                                                            ex.printStackTrace();
+
+                                                                        }
+                                                                    }
+
+                                                                    Date radica = null;
+                                                                    if (!radicacion.equals("")) {
+                                                                        try {
+
+                                                                            radica = formatoDelTexto.parse(radicacion);
+
+                                                                        } catch (Exception ex) {
+
+                                                                            ex.printStackTrace();
+
+                                                                        }
+                                                                    }
+
+                                                                    Calendar calendar = Calendar.getInstance();
+                                                                    calendar.setTime(fechaI);
+                                                                    calendar.add(Calendar.YEAR, Integer.parseInt(duracion));
+                                                                    Date ffinal = calendar.getTime();
+
+                                                                    r.setFechaVencimiento(ffinal);
+                                                                    r.setResolucion(resolucion);
+                                                                    r.setFechaInicio(fechaI);
+                                                                    r.setDuracion(Integer.parseInt(duracion));
+                                                                    r.setProgramaIdprograma(programaFacade.find(Integer.parseInt(programa)));
+                                                                    r.setInicioUno(inicio_uno);
+                                                                    r.setInicioDos(inicio_dos);
+                                                                    r.setFinaUno(fina_uno);
+                                                                    r.setFinaDos(fina_dos);
+                                                                    r.setPresentacionAuto(presentacion_auto);
+                                                                    r.setRadicacion(radica);
+                                                                    registroFacade.edit(r);
+                                                                }
                                                             }
                                                         }
                                                     }

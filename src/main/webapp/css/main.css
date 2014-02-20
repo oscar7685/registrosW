@@ -176,6 +176,7 @@ body {
 
 .ui-layout-center{
     overflow: auto;
+    background-color: transparent;
 }
 .ui-layout-west{
     padding-right: 0;
@@ -1085,4 +1086,32 @@ select,
     -o-animation:pulse 2s ease-out 0s infinite;
     -webkit-animation:pulse 2s ease-out 0s infinite;
     animation:pulse 2s ease-out 0s infinite
+}
+
+.bordeado{
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-top: 3px;
+}
+.bordeado input{
+    font-size: 11px;
+}
+
+.form-control:focus {
+    border-color: rgba(255,165,0, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline-color: -moz-use-text-color;
+    
 }

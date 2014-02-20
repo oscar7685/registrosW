@@ -37,7 +37,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Registro.findByResolucion", query = "SELECT r FROM Registro r WHERE r.resolucion = :resolucion"),
     @NamedQuery(name = "Registro.findByFechaInicio", query = "SELECT r FROM Registro r WHERE r.fechaInicio = :fechaInicio"),
     @NamedQuery(name = "Registro.findByFechaVencimiento", query = "SELECT r FROM Registro r WHERE r.fechaVencimiento = :fechaVencimiento"),
-    @NamedQuery(name = "Registro.findByDuracion", query = "SELECT r FROM Registro r WHERE r.duracion = :duracion")})
+    @NamedQuery(name = "Registro.findByDuracion", query = "SELECT r FROM Registro r WHERE r.duracion = :duracion"),
+    @NamedQuery(name = "Registro.findByInicioUno", query = "SELECT r FROM Registro r WHERE r.inicioUno = :inicioUno"),
+    @NamedQuery(name = "Registro.findByFinaUno", query = "SELECT r FROM Registro r WHERE r.finaUno = :finaUno"),
+    @NamedQuery(name = "Registro.findByInicioDos", query = "SELECT r FROM Registro r WHERE r.inicioDos = :inicioDos"),
+    @NamedQuery(name = "Registro.findByFinaDos", query = "SELECT r FROM Registro r WHERE r.finaDos = :finaDos"),
+    @NamedQuery(name = "Registro.findByPresentacionAuto", query = "SELECT r FROM Registro r WHERE r.presentacionAuto = :presentacionAuto"),
+    @NamedQuery(name = "Registro.findByRadicacion", query = "SELECT r FROM Registro r WHERE r.radicacion = :radicacion")})
 public class Registro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +63,24 @@ public class Registro implements Serializable {
     private Date fechaVencimiento;
     @Column(name = "duracion")
     private Integer duracion;
+    @Column(name = "inicio_uno")
+    @Temporal(TemporalType.DATE)
+    private Date inicioUno;
+    @Column(name = "fina_uno")
+    @Temporal(TemporalType.DATE)
+    private Date finaUno;
+    @Column(name = "inicio_dos")
+    @Temporal(TemporalType.DATE)
+    private Date inicioDos;
+    @Column(name = "fina_dos")
+    @Temporal(TemporalType.DATE)
+    private Date finaDos;
+    @Column(name = "presentacion_auto")
+    @Temporal(TemporalType.DATE)
+    private Date presentacionAuto;
+    @Column(name = "radicacion")
+    @Temporal(TemporalType.DATE)
+    private Date radicacion;
     @JoinColumn(name = "programa_idprograma", referencedColumnName = "idprograma")
     @ManyToOne(optional = false)
     private Programa programaIdprograma;
@@ -110,12 +134,15 @@ public class Registro implements Serializable {
         c.add(Calendar.MONTH, -10);
         return c.getTime();
     }
-
+    
     public Date unAnioAntes() {
         Calendar c = Calendar.getInstance();
         c.setTime(this.getFechaVencimiento());
         c.add(Calendar.YEAR, -1);
         return c.getTime();
+    }
+    public Date getInicioUno() {
+        return inicioUno;
     }
 
     public Date fechaSegundaAutoevaluacion() {
@@ -131,6 +158,9 @@ public class Registro implements Serializable {
 
         return c.getTime();
     }
+    public void setInicioUno(Date inicioUno) {
+        this.inicioUno = inicioUno;
+    }
 
     public Date fechaPrimeraAutoevaluacion() {
         Calendar c = Calendar.getInstance();
@@ -142,12 +172,50 @@ public class Registro implements Serializable {
                 c.add(Calendar.YEAR, -4);
             }
         }
-
+    
         return c.getTime();
+    }
+    public Date getFinaUno() {
+        return finaUno;
     }
 
     public void setDuracion(Integer duracion) {
         this.duracion = duracion;
+    }
+    public void setFinaUno(Date finaUno) {
+        this.finaUno = finaUno;
+    }
+
+    public Date getInicioDos() {
+        return inicioDos;
+    }
+
+    public void setInicioDos(Date inicioDos) {
+        this.inicioDos = inicioDos;
+    }
+
+    public Date getFinaDos() {
+        return finaDos;
+    }
+
+    public void setFinaDos(Date finaDos) {
+        this.finaDos = finaDos;
+    }
+
+    public Date getPresentacionAuto() {
+        return presentacionAuto;
+    }
+
+    public void setPresentacionAuto(Date presentacionAuto) {
+        this.presentacionAuto = presentacionAuto;
+    }
+
+    public Date getRadicacion() {
+        return radicacion;
+    }
+
+    public void setRadicacion(Date radicacion) {
+        this.radicacion = radicacion;
     }
 
     public Programa getProgramaIdprograma() {
@@ -182,5 +250,5 @@ public class Registro implements Serializable {
     public String toString() {
         return "com.udec.modelo.Registro[ idregistro=" + idregistro + " ]";
     }
-
+    
 }

@@ -6,6 +6,7 @@ $(function() {
     $(document).ajaxStart(function() {
         $("div.ui-layout-center").append("<div id='contenido'></div>");
         $(".spinner").show();
+        //http://tobiasahlin.com/spinkit/
         //var lodedSize = 0;
         //var number_of_media = $("body img").length;
         // function for the progress bar

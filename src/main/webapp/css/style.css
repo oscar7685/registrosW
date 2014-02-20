@@ -30,8 +30,8 @@
     margin: 100px auto 0;
     width: 70px;
     text-align: center;
-    background-color: #000000;
-    z-index: 99999;
+    background-color: transparent;
+    z-index: 99999 !important;
 }
 
 .spinner h2{
@@ -53,7 +53,7 @@
     /* Prevent first frame from flickering when animation starts */
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    z-index: 99999;
+    z-index: 99999 !important;
 }
 
 .spinner .bounce1 {

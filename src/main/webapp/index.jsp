@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
         <!--<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css">-->
         <!--<link rel="stylesheet" href="<%=request.getContextPath()%>/css/otro.css">-->
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/datepicker.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
         <!--<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-responsive.min.css">-->
