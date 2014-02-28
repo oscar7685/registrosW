@@ -1,8 +1,11 @@
 $(function() {
-    var urlx;
+    hash = location.hash;
+    if (hash === "#listarProgramas") {
+        location = "/registrosW/#inicio";
+    } else {
+        location = "/registrosW/#listarProgramas";
+    }
 
-
-    location = "/registrosW/#inicio";
     $(document).ajaxStart(function() {
         $("div.ui-layout-center").append("<div id='contenido'></div>");
         $(".spinner").show();
@@ -30,8 +33,7 @@ $(function() {
     var myLayout;
     myLayout = $('body').layout({
         //	enable showOverflow on west-pane so CSS popups will overlap north pane
-        west__size: 270
-        , center__paneSelector: ".ui-layout-center"
+        center__paneSelector: ".ui-layout-center"
         , north__paneClass: "ui-layout-pane2"
                 //	reference only - these options are NOT required because 'true' is the default
         , closable: true	// pane can open & close
@@ -45,25 +47,7 @@ $(function() {
         , south__resizable: false	// OVERRIDE the pane-default of 'resizable=true'
         , south__closable: false
         , south__spacing_open: 0		// no resizer-bar when open (zero height)
-        , west__spacing_open: 0
-        , west__spacing_closed: 20
-        , west__togglerLength_closed: 35
-        , west__togglerAlign_closed: "top"
-        , west__togglerContent_closed: "<button id='west-open' class='close' style='float:left;margin-left:4px;opacity:1;margin-top:-10px;'>&raquo;</button>"
-        , west__togglerTip_closed: "Mostrar menú"
-        , west__togglerTip_open: "Ocultar menú"
-        , west__enableCursorHotkey: false
-        , west__onclose_end: function() {
-            $("#conte").removeClass("span10").addClass("span12");
-        }
-        , west__onopen_end: function() {
-            $("#conte").removeClass("span12").addClass("span10");
-        }
         , south__paneClass: "ui-layout-pane"
-        , west__togglerContent_open: ""
-        , west__minSize: 200
-        , west__maxSize: 350
-
 
     });
     myLayout.allowOverflow('north');
@@ -84,7 +68,6 @@ $(function() {
     var hash;
     $(window).hashchange(function() {
         hash = location.hash;
-
         if (hash === "#CerrarSesion") {
             $.post('/registrosW/Login?action=CerrarSesion', function() {
                 location = "/registrosW";
@@ -92,6 +75,7 @@ $(function() {
             });//fin post
 
         } else {
+
             if (hash === "#inicio" || hash === "#listarFacultades" || hash === "#listarProgramas"
                     || hash === "#listarRegistros" || hash === "#crearFacultad"
                     || hash === "#crearPrograma" || hash === "#crearRegistro") {
@@ -154,6 +138,7 @@ $(function() {
 
 
         }
+
 
 
     });

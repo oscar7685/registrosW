@@ -134,13 +134,14 @@ public class Registro implements Serializable {
         c.add(Calendar.MONTH, -10);
         return c.getTime();
     }
-    
+
     public Date unAnioAntes() {
         Calendar c = Calendar.getInstance();
         c.setTime(this.getFechaVencimiento());
         c.add(Calendar.YEAR, -1);
         return c.getTime();
     }
+
     public Date getInicioUno() {
         return inicioUno;
     }
@@ -158,6 +159,7 @@ public class Registro implements Serializable {
 
         return c.getTime();
     }
+
     public void setInicioUno(Date inicioUno) {
         this.inicioUno = inicioUno;
     }
@@ -172,9 +174,10 @@ public class Registro implements Serializable {
                 c.add(Calendar.YEAR, -4);
             }
         }
-    
+
         return c.getTime();
     }
+
     public Date getFinaUno() {
         return finaUno;
     }
@@ -182,6 +185,7 @@ public class Registro implements Serializable {
     public void setDuracion(Integer duracion) {
         this.duracion = duracion;
     }
+
     public void setFinaUno(Date finaUno) {
         this.finaUno = finaUno;
     }
@@ -250,5 +254,5 @@ public class Registro implements Serializable {
     public String toString() {
         return "com.udec.modelo.Registro[ idregistro=" + idregistro + " ]";
     }
-    
+
 }

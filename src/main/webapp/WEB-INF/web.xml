@@ -16,6 +16,10 @@
         <servlet-name>borrar</servlet-name>
         <servlet-class>com.udec.controlador.borrar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.udec.controlador.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>borrar</servlet-name>
         <url-pattern>/borrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

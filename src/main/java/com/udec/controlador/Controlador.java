@@ -11,6 +11,7 @@ import com.udec.ejb.RegistroFacade;
 import com.udec.modelo.Facultad;
 import com.udec.modelo.Programa;
 import com.udec.modelo.Registro;
+import com.udec.modelo.Usuarios;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,7 +67,15 @@ public class Controlador extends HttpServlet {
             } else {
                 if (action.equals("listarProgramas")) {
                     String url = "/programa/listar.jsp";
-                    sesion.setAttribute("listaP", programaFacade.findAll());
+                    String tipo = (String) sesion.getAttribute("tipo");
+                    Usuarios us = (Usuarios) sesion.getAttribute("usuario");
+                    if (tipo.equals("Decano")) {
+                        sesion.setAttribute("listaP", programaFacade.findByList("facultadIdfacultad", us.getFacultadIdfacultad()));
+                    } else {
+                        sesion.setAttribute("listaP", programaFacade.findAll());
+                    }
+
+                    sesion.setAttribute("fechaActual", new Date());
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                 } else {

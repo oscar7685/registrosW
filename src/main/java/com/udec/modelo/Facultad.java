@@ -45,6 +45,8 @@ public class Facultad implements Serializable {
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultadIdfacultad")
     private List<Programa> programaList;
+    @OneToMany(mappedBy = "facultadIdfacultad")
+    private List<Usuarios> usuariosList;
 
     public Facultad() {
     }
@@ -76,6 +78,15 @@ public class Facultad implements Serializable {
 
     public void setProgramaList(List<Programa> programaList) {
         this.programaList = programaList;
+    }
+
+    @XmlTransient
+    public List<Usuarios> getUsuariosList() {
+        return usuariosList;
+    }
+
+    public void setUsuariosList(List<Usuarios> usuariosList) {
+        this.usuariosList = usuariosList;
     }
 
     @Override

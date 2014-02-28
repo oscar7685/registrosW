@@ -6,6 +6,7 @@
 package com.udec.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -153,5 +154,7 @@ public class Programa implements Serializable {
     public String toString() {
         return "com.udec.modelo.Programa[ idprograma=" + idprograma + " ]";
     }
-
+    public boolean comparar(Date d1, Date d2) {
+        return d1.before(d2);
+    }
 }
