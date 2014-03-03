@@ -68,7 +68,7 @@
                         <div class="controls">
                             <select id="facultad" name="facultad" class="{required:true}">
                                 <option></option>
-                                <c:forEach items="${listaF}" var="row" varStatus="iter">
+                                <c:forEach items="${facultades}" var="row" varStatus="iter">
                                     <option value="${row.idfacultad}">${row.nombre}</option>
                                 </c:forEach>
                             </select>                

@@ -101,7 +101,7 @@
                                         </c:choose>
                                     </td>
                                     <!--primera autoevaluacion--->
-                                    <fmt:formatDate value="${row.getUltimoRegistro().inicioDos}" pattern="dd/MM/yyyy" var="final1" />
+                                    <fmt:formatDate value="${row.getUltimoRegistro().finaUno}" pattern="dd/MM/yyyy" var="final1" />
                                     <fmt:formatDate value="${row.getUltimoRegistro().inicioUno}" pattern="dd/MM/yyyy" var="inicio1" />
                                     <fmt:formatDate value="${row.getUltimoRegistro().fechaPrimeraAutoevaluacion()}" pattern="dd/MM/yyyy" var="fechaLimite1" />
 
@@ -127,7 +127,7 @@
                                     </td>
                                     <!--segunda autoevaluacion-->
                                     <fmt:formatDate value="${row.getUltimoRegistro().finaDos}" pattern="dd/MM/yyyy" var="final2" />
-                                    <fmt:formatDate value="${row.getUltimoRegistro().finaUno}" pattern="dd/MM/yyyy" var="inicio2" />
+                                    <fmt:formatDate value="${row.getUltimoRegistro().inicioUno}" pattern="dd/MM/yyyy" var="inicio2" />
                                     <c:choose>
                                         <c:when test="${row.comparar(row.getUltimoRegistro().fechaSegundaAutoevaluacion(),fechaActual) && inicio2==null }">
                                             <td class="grave">

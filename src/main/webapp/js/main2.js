@@ -84,7 +84,6 @@ $(function() {
     var hash;
     $(window).hashchange(function() {
         hash = location.hash;
-
         if (hash === "#CerrarSesion") {
             $.post('/registrosW/Login?action=CerrarSesion', function() {
                 location = "/registrosW";
@@ -92,9 +91,9 @@ $(function() {
             });//fin post
 
         } else {
-            if (hash === "#inicio" || hash === "#listarFacultades" || hash === "#listarProgramas"
+            if (hash === "#inicio" || hash === "#listarFacultades" || hash === "#listarProgramas" || hash === "#listarDecanos"
                     || hash === "#listarRegistros" || hash === "#crearFacultad"
-                    || hash === "#crearPrograma" || hash === "#crearRegistro") {
+                    || hash === "#crearPrograma" || hash === "#crearRegistro" || hash === "#crearDecano") {
                 var url3 = "/registrosW/" + hash;
                 url3 = url3.replace('#', "Controlador?action=") + "";
                 setTimeout(function() {
@@ -131,7 +130,7 @@ $(function() {
                 }); //fin del $.ajax
             } else {
                 if (hash.indexOf("#editarFacultad") !== -1 || hash.indexOf("#editarPrograma") !== -1
-                        || hash.indexOf("#editarRegistro") !== -1) {
+                        || hash.indexOf("#editarRegistro") !== -1 || hash.indexOf("#editarDecano") !== -1) {
                     var cual = hash.split("&");
                     hash = cual[0];
                     var url3 = "/registrosW/Controlador?action=";

@@ -8,6 +8,7 @@ package com.udec.controlador;
 import com.udec.ejb.FacultadFacade;
 import com.udec.ejb.ProgramaFacade;
 import com.udec.ejb.RegistroFacade;
+import com.udec.ejb.UsuariosFacade;
 import com.udec.modelo.Facultad;
 import com.udec.modelo.Programa;
 import com.udec.modelo.Registro;
@@ -32,6 +33,8 @@ import javax.servlet.http.HttpSession;
  */
 public class Controlador extends HttpServlet {
 
+    @EJB
+    private UsuariosFacade usuariosFacade;
     @EJB
     private RegistroFacade registroFacade;
     @EJB
@@ -312,6 +315,67 @@ public class Controlador extends HttpServlet {
                                                                     r.setPresentacionAuto(presentacion_auto);
                                                                     r.setRadicacion(radica);
                                                                     registroFacade.edit(r);
+                                                                } else {
+                                                                    if (action.equals("listarDecanos")) {
+                                                                        String url = "/decanos/listar.jsp";
+                                                                        sesion.setAttribute("listaD", usuariosFacade.findByList("tipo", "Decano"));
+                                                                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                                                                        rd.forward(request, response);
+                                                                    } else {
+                                                                        if (action.equals("crearDecano")) {
+                                                                            String url = "/decanos/crear.jsp";
+                                                                            sesion.setAttribute("facultades", facultadFacade.findAll());
+                                                                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                                                                            rd.forward(request, response);
+                                                                        } else {
+                                                                            if (action.equals("crearDecano2")) {
+                                                                                String codigo = (String) request.getParameter("codigo");
+                                                                                String nombres = (String) request.getParameter("nombres");
+                                                                                String apellidos = (String) request.getParameter("apellidos");
+                                                                                String clave = (String) request.getParameter("clave");
+                                                                                String facultad = (String) request.getParameter("facultad");
+                                                                                Facultad fa = facultadFacade.find(Integer.parseInt(facultad));
+                                                                                Usuarios decano = new Usuarios();
+                                                                                decano.setApellidos(apellidos);
+                                                                                decano.setCedula(Integer.parseInt(codigo));
+                                                                                decano.setNombres(nombres);
+                                                                                decano.setClave(clave);
+                                                                                decano.setFacultadIdfacultad(fa);
+                                                                                decano.setTipo("Decano");
+                                                                                usuariosFacade.create(decano);
+                                                                            } else {
+                                                                                if (action.equals("editarDecano")) {
+                                                                                    String url = "/decanos/editar.jsp";
+                                                                                    Usuarios decano = null;
+                                                                                    String iddecano = (String) request.getParameter("id");
+
+                                                                                    if (iddecano != null) {
+                                                                                        decano = usuariosFacade.find(Integer.parseInt(iddecano));
+                                                                                    }
+                                                                                    sesion.setAttribute("decano", decano);
+                                                                                    sesion.setAttribute("facultades", facultadFacade.findAll());
+                                                                                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                                                                                    rd.forward(request, response);
+                                                                                } else {
+                                                                                    if (action.equals("editarDecano2")) {
+                                                                                        String codigo = (String) request.getParameter("codigo");
+                                                                                        String nombres = (String) request.getParameter("nombres");
+                                                                                        String apellidos = (String) request.getParameter("apellidos");
+                                                                                        String clave = (String) request.getParameter("clave");
+                                                                                        String facultad = (String) request.getParameter("facultad");
+                                                                                        Facultad fa = facultadFacade.find(Integer.parseInt(facultad));
+                                                                                        Usuarios decano = usuariosFacade.find(Integer.parseInt(codigo));
+                                                                                        decano.setApellidos(apellidos);
+                                                                                        decano.setNombres(nombres);
+                                                                                        decano.setClave(clave);
+                                                                                        decano.setFacultadIdfacultad(fa);
+                                                                                        usuariosFacade.edit(decano);
+                                                                                    }
+                                                                                }
+                                                                            }
+
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }

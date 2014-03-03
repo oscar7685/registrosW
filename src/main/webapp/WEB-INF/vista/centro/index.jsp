@@ -107,16 +107,18 @@
             <div class="span3 product_list">
                 <ul class="nav">
                     <li>
-                        <a href="#listarFacultades">Facultades</a>
-                    </li>
-                    <li>
                         <a href="#listarProgramas">Programas</a>
                     </li>
                     <li>
                         <a href="#listarRegistros">Registros</a>
                     </li>
-                    <li><a href="#">Acreditaciones</a></li>
-
+                    <li><a href="#listarAcreditaciones">Acreditaciones</a></li>
+                    <li>
+                        <a href="#listarFacultades">Facultades</a>
+                    </li>
+                    <li>
+                        <a href="#listarDecanos">Decanos</a>
+                    </li>
 
                 </ul>
             </div>
