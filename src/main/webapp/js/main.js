@@ -1,11 +1,7 @@
 $(function() {
     //location = "/sap/#inicio";
-    
     $("#formulario_login").validate({
-        errorLabelContainer: ".alert-error",
         submitHandler: function() {
-            console.log("esta bn");
-        
             this.timer = setTimeout(function() {
                 $.ajax({
                     url: '/registrosW/Login',
@@ -20,7 +16,7 @@ $(function() {
 
                         } else {
                             if (msg == 1) {
-                                alert("error de ingreso!!!");
+
                             }
 
                         }
@@ -34,4 +30,14 @@ $(function() {
 
         }
     });
+    $('#formulario_login input').each(function() {
+        $(this).rules('add', {
+            messages: {
+                required: '<div class="error"><span>+</span></div>'
+            }
+        });
     });
+    $('#enlaceAcercaDe').click(function() {
+        $('#ModalAcercaDe').modal("show");
+    });
+});

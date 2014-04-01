@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.udec.ejb;
 
 import java.util.List;
@@ -15,6 +14,7 @@ import javax.persistence.Query;
  * @author Ususario
  */
 public abstract class AbstractFacade<T> {
+
     private Class<T> entityClass;
 
     public AbstractFacade(Class<T> entityClass) {
@@ -67,14 +67,13 @@ public abstract class AbstractFacade<T> {
         Query q = getEntityManager().createQuery("SELECT c FROM " + entityClass.getSimpleName() + " c WHERE c." + property1 + " = :name1 and c." + property2 + " = :name2", entityClass);
         q.setParameter("name1", m1);
         q.setParameter("name2", m2);
-        System.out.println("query:"+q.toString());
         return q.getResultList();
     }
-    
+
     public List<T> findByList(String property, Object m) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery("SELECT c FROM " + entityClass.getSimpleName() + " c WHERE c." + property + " = :name", entityClass).setParameter("name", m).getResultList();
     }
-    
+
 }

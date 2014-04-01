@@ -59,6 +59,8 @@ public class Programa implements Serializable {
     private Facultad facultadIdfacultad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "programaIdprograma")
     private List<Registro> registroList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "programaIdprograma")
+    private List<Acreditacion> acreditacionList;
 
     public Programa() {
     }
@@ -130,6 +132,15 @@ public class Programa implements Serializable {
         this.registroList = registroList;
     }
 
+    @XmlTransient
+    public List<Acreditacion> getAcreditacionList() {
+        return acreditacionList;
+    }
+
+    public void setAcreditacionList(List<Acreditacion> acreditacionList) {
+        this.acreditacionList = acreditacionList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -154,6 +165,7 @@ public class Programa implements Serializable {
     public String toString() {
         return "com.udec.modelo.Programa[ idprograma=" + idprograma + " ]";
     }
+
     public boolean comparar(Date d1, Date d2) {
         return d1.before(d2);
     }

@@ -126,12 +126,12 @@
 }
 .datepicker td span.active {
   color: #ffffff;
-  background-color: #006dcc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
-  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-color: #DD4814;
+  background-image: -moz-linear-gradient(top, #DD8814, #DD4814);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#DD8814), to(#DD4814));
+  background-image: -webkit-linear-gradient(top, #DD8814, #DD4814);
+  background-image: -o-linear-gradient(top, #DD8814, #DD4814);
+  background-image: linear-gradient(to bottom, #DD8814, #DD4814);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
   border-color: #0044cc #0044cc #002a80;
@@ -150,8 +150,8 @@
 .datepicker td span.active.disabled,
 .datepicker td span.active[disabled] {
   color: #ffffff;
-  background-color: #0044cc;
-  *background-color: #003bb3;
+  background-color: #DD4814;
+  *background-color: #DD4814;
 }
 .datepicker td span.active:active,
 .datepicker td span.active.active {

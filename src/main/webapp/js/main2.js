@@ -92,8 +92,8 @@ $(function() {
 
         } else {
             if (hash === "#inicio" || hash === "#listarFacultades" || hash === "#listarProgramas" || hash === "#listarDecanos"
-                    || hash === "#listarRegistros" || hash === "#crearFacultad"
-                    || hash === "#crearPrograma" || hash === "#crearRegistro" || hash === "#crearDecano") {
+                    || hash === "#listarRegistros" || hash === "#crearFacultad" || hash === "#listarAcreditaciones"
+                    || hash === "#crearPrograma" || hash === "#crearRegistro" || hash === "#crearDecano" || hash === "#crearAcreditacion") {
                 var url3 = "/registrosW/" + hash;
                 url3 = url3.replace('#', "Controlador?action=") + "";
                 setTimeout(function() {
@@ -130,7 +130,7 @@ $(function() {
                 }); //fin del $.ajax
             } else {
                 if (hash.indexOf("#editarFacultad") !== -1 || hash.indexOf("#editarPrograma") !== -1
-                        || hash.indexOf("#editarRegistro") !== -1 || hash.indexOf("#editarDecano") !== -1) {
+                        || hash.indexOf("#editarRegistro") !== -1 || hash.indexOf("#editarDecano") !== -1 || hash.indexOf("#editarAcreditacion") !== -1) {
                     var cual = hash.split("&");
                     hash = cual[0];
                     var url3 = "/registrosW/Controlador?action=";

@@ -37,7 +37,7 @@
             <div class="navbar navbar-default navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Registros</a>
+                        <a class="navbar-brand" href="#"><img style="margin-top: -10px;" src="<%=request.getContextPath()%>/css/images/logo3.png"/></a>
                         <button data-target="#navbar-main" data-toggle="collapse" type="button" class="navbar-toggle">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -56,7 +56,7 @@
                                 <a target="_blank" href="http://autoevaluacioninstitucional.unicartagena.edu.co/">Contacto</a>
                             </li>
                             <li>
-                                <a href="#">Acerca de</a>
+                                <a href="#" id="enlaceAcercaDe">Acerca de</a>
                             </li>
 
                         </ul>
@@ -103,6 +103,27 @@
 
             </div>
         </div><!--/Center-->
+        <div class="modal fade" id="ModalAcercaDe" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding-bottom: 19px; border-bottom:0;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body" align="center">
+                        <img src="<%=request.getContextPath()%>/css/images/logo3.png"/>
+                        <br>
+                        <%--    <div style="background-color: #282728;border-top: 0px;border-radius:0;" class="modal-footer">--%>
+                        <%-- <a class="btn btn-primary" data-dismiss="modal" href="#">Cerrar</a>--%>
+                        <p style="color: #FFFFFF; text-align: right">Serca-UdeC v1.0</p>
+                        <p style="color: #FFFFFF; text-align: justify">El sistema para el seguimiento de registros calificados y acreditación de programas es un apoyo fundamental para la institución y sus programas academicos, puesto que permite conocer los tiempos reglamentarios para realizar los procesos de autoevaluación con fines de renovacion de registros calificados y/o de reacreditación, brindando un sistema de alerta temprana con el fin evitar el vencimiento de los registros calificados y/o acreditación de los programas.</p>
+                        <br/>
+                        <p style="color: #FFFFFF;  text-align: right">Desarrollado por el Centro de Autoevaluaci&oacute;n</p>
+                        <p style="color: #FFFFFF; text-align: right">Edna Margarita Gómez Bustamante, Oscar Javier Ballesteros Pacheco, Merly Li&nacute;an Jaraba.</p>
+                        <%--  </div>--%>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </body>
 </html>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

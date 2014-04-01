@@ -5,10 +5,12 @@
  */
 package com.udec.controlador;
 
+import com.udec.ejb.AcreditacionFacade;
 import com.udec.ejb.FacultadFacade;
 import com.udec.ejb.ProgramaFacade;
 import com.udec.ejb.RegistroFacade;
 import com.udec.ejb.UsuariosFacade;
+import com.udec.modelo.Acreditacion;
 import com.udec.modelo.Facultad;
 import com.udec.modelo.Programa;
 import com.udec.modelo.Registro;
@@ -33,6 +35,8 @@ import javax.servlet.http.HttpSession;
  */
 public class Controlador extends HttpServlet {
 
+    @EJB
+    private AcreditacionFacade acreditacionFacade;
     @EJB
     private UsuariosFacade usuariosFacade;
     @EJB
@@ -75,7 +79,12 @@ public class Controlador extends HttpServlet {
                     if (tipo.equals("Decano")) {
                         sesion.setAttribute("listaP", programaFacade.findByList("facultadIdfacultad", us.getFacultadIdfacultad()));
                     } else {
-                        sesion.setAttribute("listaP", programaFacade.findAll());
+                        if (tipo.equals("Director postgrado")) {
+                            sesion.setAttribute("listaP", programaFacade.findByList("tipoFormacion", "Postgrado"));
+                        } else {
+                            sesion.setAttribute("listaP", programaFacade.findAll());
+                        }
+
                     }
 
                     sesion.setAttribute("fechaActual", new Date());
@@ -151,6 +160,7 @@ public class Controlador extends HttpServlet {
                                                 } else {
                                                     if (action.equals("crearRegistro")) {
                                                         String url = "/registro/crear.jsp";
+                                                        sesion.setAttribute("listaP", programaFacade.findAll());
                                                         RequestDispatcher rd = request.getRequestDispatcher(url);
                                                         rd.forward(request, response);
                                                     } else {
@@ -370,6 +380,187 @@ public class Controlador extends HttpServlet {
                                                                                         decano.setClave(clave);
                                                                                         decano.setFacultadIdfacultad(fa);
                                                                                         usuariosFacade.edit(decano);
+                                                                                    } else {
+                                                                                        if (action.equals("listarAcreditaciones")) {
+                                                                                            String url = "/acreditacion/listar.jsp";
+                                                                                            sesion.setAttribute("listaA", acreditacionFacade.findAll());
+                                                                                            RequestDispatcher rd = request.getRequestDispatcher(url);
+                                                                                            rd.forward(request, response);
+                                                                                        } else {
+                                                                                            if (action.equals("crearAcreditacion")) {
+                                                                                                String url = "/acreditacion/crear.jsp";
+                                                                                                sesion.setAttribute("listaP", programaFacade.findAll());
+                                                                                                RequestDispatcher rd = request.getRequestDispatcher(url);
+                                                                                                rd.forward(request, response);
+                                                                                            } else {
+                                                                                                if (action.equals("crearAcreditacion2")) {
+                                                                                                    String resolucion = (String) request.getParameter("resolucion");
+                                                                                                    String inicio = (String) request.getParameter("inicio");
+                                                                                                    String duracion = (String) request.getParameter("duracion");
+                                                                                                    String programa = (String) request.getParameter("programa");
+                                                                                                    Programa p = programaFacade.find(Integer.parseInt(programa));
+                                                                                                    Acreditacion ac = new Acreditacion();
+                                                                                                    ac.setResolucion(resolucion);
+                                                                                                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                                                                                                    Date fechaI = null;
+                                                                                                    try {
+
+                                                                                                        fechaI = formatoDelTexto.parse(inicio);
+
+                                                                                                    } catch (Exception ex) {
+
+                                                                                                        ex.printStackTrace();
+
+                                                                                                    }
+
+                                                                                                    ac.setFechaInicio(fechaI);
+                                                                                                    Calendar calendar = Calendar.getInstance();
+                                                                                                    calendar.setTime(fechaI);
+                                                                                                    calendar.add(Calendar.YEAR, Integer.parseInt(duracion));
+                                                                                                    Date ffinal = calendar.getTime();
+                                                                                                    ac.setFechaVencimiento(ffinal);
+                                                                                                    ac.setDuracion(Integer.parseInt(duracion));
+                                                                                                    ac.setProgramaIdprograma(p);
+                                                                                                    acreditacionFacade.create(ac);
+                                                                                                    p.getAcreditacionList().add(ac);
+                                                                                                    programaFacade.edit(p);
+                                                                                                } else {
+                                                                                                    if (action.equals("editarAcreditacion")) {
+                                                                                                        String url = "/acreditacion/editar.jsp";
+                                                                                                        String id = request.getParameter("id");
+                                                                                                        Acreditacion ac = acreditacionFacade.find(Integer.parseInt(id));
+                                                                                                        sesion.setAttribute("acreditacion", ac);
+                                                                                                        sesion.setAttribute("listaP", programaFacade.findAll());
+                                                                                                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                                                                                                        rd.forward(request, response);
+                                                                                                    } else {
+                                                                                                        if (action.equals("editarAcreditacion2")) {
+                                                                                                            Acreditacion r = (Acreditacion) sesion.getAttribute("acreditacion");
+                                                                                                            String resolucion = (String) request.getParameter("resolucion");
+                                                                                                            String finicio = (String) request.getParameter("inicio");
+                                                                                                            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+                                                                                                            Date fechaI = null;
+                                                                                                            try {
+
+                                                                                                                fechaI = formatoDelTexto.parse(finicio);
+
+                                                                                                            } catch (Exception ex) {
+
+                                                                                                                ex.printStackTrace();
+
+                                                                                                            }
+
+                                                                                                            String duracion = (String) request.getParameter("duracion");
+                                                                                                            String programa = (String) request.getParameter("programa");
+                                                                                                            String inicioUno = (String) request.getParameter("inicioUno");
+                                                                                                            String inicioDos = (String) request.getParameter("inicioDos");
+                                                                                                            String finaDos = (String) request.getParameter("finaDos");
+                                                                                                            String finaUno = (String) request.getParameter("finaUno");
+                                                                                                            String presentacionAuto = (String) request.getParameter("presentacionAuto");
+                                                                                                            String radicacion = (String) request.getParameter("radicacion");
+
+                                                                                                            Date inicio_uno = null;
+                                                                                                            if (!inicioUno.equals("")) {
+                                                                                                                try {
+
+                                                                                                                    inicio_uno = formatoDelTexto.parse(inicioUno);
+
+                                                                                                                } catch (Exception ex) {
+
+                                                                                                                    ex.printStackTrace();
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            Date inicio_dos = null;
+                                                                                                            if (!inicioDos.equals("")) {
+                                                                                                                try {
+
+                                                                                                                    inicio_dos = formatoDelTexto.parse(inicioDos);
+
+                                                                                                                } catch (Exception ex) {
+
+                                                                                                                    ex.printStackTrace();
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            Date fina_uno = null;
+                                                                                                            if (!finaUno.equals("")) {
+                                                                                                                try {
+
+                                                                                                                    fina_uno = formatoDelTexto.parse(finaUno);
+
+                                                                                                                } catch (Exception ex) {
+
+                                                                                                                    ex.printStackTrace();
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            Date fina_dos = null;
+                                                                                                            if (!finaDos.equals("")) {
+                                                                                                                try {
+
+                                                                                                                    fina_dos = formatoDelTexto.parse(finaDos);
+
+                                                                                                                } catch (Exception ex) {
+
+                                                                                                                    ex.printStackTrace();
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            Date presentacion_auto = null;
+                                                                                                            if (!presentacionAuto.equals("")) {
+                                                                                                                try {
+
+                                                                                                                    presentacion_auto = formatoDelTexto.parse(presentacionAuto);
+
+                                                                                                                } catch (Exception ex) {
+
+                                                                                                                    ex.printStackTrace();
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            Date radica = null;
+                                                                                                            if (!radicacion.equals("")) {
+                                                                                                                try {
+
+                                                                                                                    radica = formatoDelTexto.parse(radicacion);
+
+                                                                                                                } catch (Exception ex) {
+
+                                                                                                                    ex.printStackTrace();
+
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                            Calendar calendar = Calendar.getInstance();
+                                                                                                            calendar.setTime(fechaI);
+                                                                                                            calendar.add(Calendar.YEAR, Integer.parseInt(duracion));
+                                                                                                            Date ffinal = calendar.getTime();
+
+                                                                                                            r.setFechaVencimiento(ffinal);
+                                                                                                            r.setResolucion(resolucion);
+                                                                                                            r.setFechaInicio(fechaI);
+                                                                                                            r.setDuracion(Integer.parseInt(duracion));
+                                                                                                            r.setProgramaIdprograma(programaFacade.find(Integer.parseInt(programa)));
+                                                                                                            r.setInicioUno(inicio_uno);
+                                                                                                            r.setInicioDos(inicio_dos);
+                                                                                                            r.setFinaUno(fina_uno);
+                                                                                                            r.setFinaDos(fina_dos);
+                                                                                                            r.setPresentacionAuto(presentacion_auto);
+                                                                                                            r.setRadicacion(radica);
+                                                                                                            acreditacionFacade.edit(r);
+                                                                                                        }
+
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+
                                                                                     }
                                                                                 }
                                                                             }

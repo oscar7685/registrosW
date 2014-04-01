@@ -37,7 +37,7 @@
             <div class="navbar navbar-default navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Registros</a>
+                        <a class="navbar-brand" href="#"><img style="margin-top: -10px;" src="<%=request.getContextPath()%>/css/images/logo3.png"/></a>
                         <button data-target="#navbar-main" data-toggle="collapse" type="button" class="navbar-toggle">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>

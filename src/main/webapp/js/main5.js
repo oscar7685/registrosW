@@ -142,4 +142,7 @@ $(function() {
 
 
     });
+$('#enlaceAcercaDe').click(function() {
+        $('#ModalAcercaDe').modal("show");
+    });
 });
