@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.udec.controlador;
 
 import java.io.File;
@@ -19,9 +18,8 @@ import javax.servlet.jsp.jstl.sql.Result;
 public class borrar extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -32,27 +30,36 @@ public class borrar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String file = (String) request.getParameter("file");
-        String str = request.getSession().getServletContext().getRealPath("/file/");
+        String file2 = (String) request.getParameter("file2");
+        String file3="";
+        String str="";
+        if (file != null && !file.equals("")) {
+            str = request.getSession().getServletContext().getRealPath("/file/");
+            file3=file;
+        }
+        if (file2 != null && !file2.equals("")) {
+            str = request.getSession().getServletContext().getRealPath("/file2/");
+            file3=file2;
+        }
         String str2 = request.getSession().getServletContext().getRealPath("/thumbnails/");
-        File fichero1 = new File(str + "\\" + file);
-        File fichero2 = new File(str2 + "\\" + file);
+        File fichero1 = new File(str + "\\" + file3);
+        File fichero2 = new File(str2 + "\\" + file3);
         if (fichero1.delete()) {
-        //    System.out.println("El fichero ha sido borrado satisfactoriamente");
+            //    System.out.println("El fichero ha sido borrado satisfactoriamente");
         } else {
-          //  System.out.println("El fichero no puede ser borrado");
+            //  System.out.println("El fichero no puede ser borrado");
         }
         if (fichero2.delete()) {
-          //System.out.println("El fichero ha sido borrado satisfactoriamente");
+            //System.out.println("El fichero ha sido borrado satisfactoriamente");
         } else {
             //System.out.println("El fichero no puede ser borrado");
         }
-        System.out.println("borre todo sin problemas!!!");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -66,8 +73,7 @@ public class borrar extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -79,12 +85,13 @@ public class borrar extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     /**
      * Returns a short description of the servlet.
      *

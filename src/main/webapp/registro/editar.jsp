@@ -17,6 +17,10 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function() {
+        $('img').on("click", function(e) {
+            return false;
+        });
+
         $('#inicio').datepicker({
             format: 'dd/mm/yyyy'
         });
@@ -165,7 +169,7 @@
 
 
             <br/>           
-            <form id="fileupload" action="Subir" method="POST" enctype="multipart/form-data">
+            <form id="fileupload" action="Subir?tipo=registro" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Anexos</legend>
                     <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -267,14 +271,14 @@
     <td>
     <span class="preview">
     {% if (file.thumbnailUrl) { %}
-    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+     <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" ><img src="{%=file.thumbnailUrl%}"></a>
     {% } %}
     </span>
     </td>
     <td>
     <p class="name">
     {% if (file.url) { %}
-    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+    <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}">{%=file.name%}</a>
     {% } else { %}
     <span>{%=file.name%}</span>
     {% } %}
@@ -290,21 +294,21 @@
     <c:choose>
         <c:when test="${usuario.tipo=='Centro Autoevaluación'}">
             {% if (file.deleteUrl) { %}
-    <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-    <i class="glyphicon glyphicon-trash"></i>
-    <span>Borrar</span>
-    </button>
-    <input type="checkbox" name="delete" value="1" class="toggle">
-    {% } else { %}
-    <button class="btn btn-warning cancel">
-    <i class="glyphicon glyphicon-ban-circle"></i>
-    <span>Cancel</span>
-    </button>
-    {% } %}
-    </td>
+            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+            <i class="glyphicon glyphicon-trash"></i>
+            <span>Borrar</span>
+            </button>
+            <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+            <button class="btn btn-warning cancel">
+            <i class="glyphicon glyphicon-ban-circle"></i>
+            <span>Cancel</span>
+            </button>
+            {% } %}
+            </td>
         </c:when>
     </c:choose>
-    
+
     </tr>
     {% } %}
 </script>

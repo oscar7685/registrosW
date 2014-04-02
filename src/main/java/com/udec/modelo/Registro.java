@@ -8,6 +8,7 @@ package com.udec.modelo;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -176,6 +177,78 @@ public class Registro implements Serializable {
         }
 
         return c.getTime();
+    }
+
+    public String DiferenciaEnDiasMesesYAnos() {
+        String faltan = "";
+        Calendar startCalendar = new GregorianCalendar();
+        startCalendar.setTime(new java.util.Date());
+        Calendar endCalendar = new GregorianCalendar();
+        endCalendar.setTime(this.getFechaVencimiento());
+
+        int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+        int diffMonth = endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+        int diffDias = endCalendar.get(Calendar.DAY_OF_MONTH) - startCalendar.get(Calendar.DAY_OF_MONTH);
+        if (endCalendar.after(startCalendar)) {
+            faltan = "Falta(n) ";
+            if (diffYear > 0) {
+                if (diffMonth == 1) {
+                    faltan += diffYear + " año ";
+                } else {
+                    faltan += diffYear + " años ";
+                }
+
+            }
+            if (diffMonth > 0) {
+                if (diffMonth == 1) {
+                    faltan += diffMonth + " mes ";
+                } else {
+                    faltan += diffMonth + " meses ";
+                }
+
+            }
+            if (diffDias > 0) {
+                if (diffDias == 1) {
+                    faltan += diffDias + " dia ";
+                } else {
+                    faltan += diffDias + " dias ";
+                }
+
+            }
+            faltan += " para el vencimiento del registro calificado";
+        } else {
+            if (endCalendar.before(startCalendar)) {
+                faltan += "El registro calificado esta vencido hace ";
+                if (diffYear > 0) {
+                    if (diffMonth == 1) {
+                        faltan += diffYear + " año ";
+                    } else {
+                        faltan += diffYear + " años ";
+                    }
+
+                }
+                if (diffMonth > 0) {
+                    if (diffMonth == 1) {
+                        faltan += diffMonth + " mes ";
+                    } else {
+                        faltan += diffMonth + " meses ";
+                    }
+
+                }
+                if (diffDias > 0) {
+                    if (diffDias == 1) {
+                        faltan += diffDias + " dia ";
+                    } else {
+                        faltan += diffDias + " dias ";
+                    }
+
+                }
+            } else {
+                faltan += "El registro calificado vence hoy";
+            }
+        }
+
+        return faltan;
     }
 
     public Date getFinaUno() {

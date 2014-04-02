@@ -5,6 +5,7 @@
  */
 package com.udec.controlador;
 
+import com.udec.modelo.Acreditacion;
 import com.udec.modelo.Registro;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -38,53 +39,109 @@ public class Subir extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         HttpSession sesion = request.getSession();
-        Registro r = (Registro) sesion.getAttribute("registro");
-        try {
-            String str = request.getSession().getServletContext().getRealPath("/file/");
-            // nos quedamos solo con el nombre y descartamos el path
-            File fichero = new File(str);
-            String[] ficheros = fichero.list();
-            String aux = "";
-            if (ficheros == null) {
-            } else {
-                for (int i = 0; i < ficheros.length; i++) {
-                    String elementos[] = ficheros[i].split("\\.");
-                    String elemento2[] = ficheros[i].split("-");
-                    if (!aux.equals("")) {
-                        if (elementos[1].equals("pdf")) {
-                            if (elemento2[0].equals("" + r.getIdregistro())) {
-                                aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
-                            }
-                        } else {
-                            if (elemento2[0].equals("" + r.getIdregistro())) {
-                                aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
-                            }
 
-                        }
+        String tipo = request.getParameter("tipo");
+        if (tipo.equals("registro")) {
+            Registro r = (Registro) sesion.getAttribute("registro");
+            try {
+                String str = request.getSession().getServletContext().getRealPath("/file/");
+                // nos quedamos solo con el nombre y descartamos el path
+                File fichero = new File(str);
+                String[] ficheros = fichero.list();
+                String aux = "";
+                if (ficheros == null) {
+                } else {
+                    for (int i = 0; i < ficheros.length; i++) {
+                        String elementos[] = ficheros[i].split("\\.");
+                        String elemento2[] = ficheros[i].split("-");
+                        if (!aux.equals("")) {
+                            if (elementos[1].equals("pdf")) {
+                                if (elemento2[0].equals("" + r.getIdregistro())) {
+                                    aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                }
+                            } else {
+                                if (elemento2[0].equals("" + r.getIdregistro())) {
+                                    aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                }
 
-                    } else {
-                        if (elementos[1].equals("pdf")) {
-                            if (elemento2[0].equals("" + r.getIdregistro())) {
-                                aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
                             }
 
                         } else {
-                            if (elemento2[0].equals("" + r.getIdregistro())) {
-                                aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                            if (elementos[1].equals("pdf")) {
+                                if (elemento2[0].equals("" + r.getIdregistro())) {
+                                    aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                }
+
+                            } else {
+                                if (elemento2[0].equals("" + r.getIdregistro())) {
+                                    aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                }
+
                             }
 
                         }
 
                     }
-
+                    writer.write("{\"files\":[" + aux + "]}");
                 }
-                writer.write("{\"files\":[" + aux + "]}");
+
+            } catch (Exception e) {
+
+            } finally {
+            }
+        } else {
+            if (tipo.equals("acreditacion")) {
+                Acreditacion r = (Acreditacion) sesion.getAttribute("acreditacion");
+                try {
+                    String str = request.getSession().getServletContext().getRealPath("/file2/");
+                    // nos quedamos solo con el nombre y descartamos el path
+                    File fichero = new File(str);
+                    String[] ficheros = fichero.list();
+                    String aux = "";
+                    if (ficheros == null) {
+                    } else {
+                        for (int i = 0; i < ficheros.length; i++) {
+                            String elementos[] = ficheros[i].split("\\.");
+                            String elemento2[] = ficheros[i].split("-");
+                            if (!aux.equals("")) {
+                                if (elementos[1].equals("pdf")) {
+                                    if (elemento2[0].equals("" + r.getIdacreditacion())) {
+                                        aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    }
+                                } else {
+                                    if (elemento2[0].equals("" + r.getIdacreditacion())) {
+                                        aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    }
+
+                                }
+
+                            } else {
+                                if (elementos[1].equals("pdf")) {
+                                    if (elemento2[0].equals("" + r.getIdacreditacion())) {
+                                        aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    }
+
+                                } else {
+                                    if (elemento2[0].equals("" + r.getIdacreditacion())) {
+                                        aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                        writer.write("{\"files\":[" + aux + "]}");
+                    }
+
+                } catch (Exception e) {
+
+                } finally {
+                }
             }
 
-        } catch (Exception e) {
-
-        } finally {
         }
+
     }
 
     /**
@@ -124,69 +181,141 @@ public class Subir extends HttpServlet {
 
         response.setContentType("text/plain");
         HttpSession sesion = request.getSession();
-        Registro r = (Registro) sesion.getAttribute("registro");
-        try {
-            List<FileItem> items = uploadHandler.parseRequest(request);
-            for (FileItem item : items) {
-                if (!item.isFormField()) {
 
-                    FileItem actual = null;
-                    actual = item;
-                    String fileName = actual.getName();
-                    String str = request.getSession().getServletContext().getRealPath("/file/");
-                    String str2 = request.getSession().getServletContext().getRealPath("/thumbnails/");
+        String tipo = request.getParameter("tipo");
+        if (tipo.equals("registro")) {
+            Registro r = (Registro) sesion.getAttribute("registro");
+            try {
+                List<FileItem> items = uploadHandler.parseRequest(request);
+                for (FileItem item : items) {
+                    if (!item.isFormField()) {
 
-                    fileName = "" + r.getIdregistro() + "-" + fileName;
-                    // nos quedamos solo con el nombre y descartamos el path
-                    File fichero = new File(str + "\\" + fileName);
+                        FileItem actual = null;
+                        actual = item;
+                        String fileName = actual.getName();
+                        String str = request.getSession().getServletContext().getRealPath("/file/");
+                        String str2 = request.getSession().getServletContext().getRealPath("/thumbnails/");
 
-                    // escribimos el fichero colgando del nuevo path
-                    actual.write(fichero);
+                        fileName = "" + r.getIdregistro() + "-" + fileName;
+                        // nos quedamos solo con el nombre y descartamos el path
+                        File fichero = new File(str + "\\" + fileName);
 
-                    String extension[] = fileName.split("\\.");
+                        // escribimos el fichero colgando del nuevo path
+                        actual.write(fichero);
 
-                    if (!extension[1].equals("pdf")) {
-                        BufferedImage img = new BufferedImage(80, 60, BufferedImage.TYPE_INT_RGB);
-                        img.createGraphics().drawImage(ImageIO.read(fichero).getScaledInstance(80, 60, Image.SCALE_SMOOTH), 0, 0, null);
-                        ImageIO.write(img, "jpg", new File(str2 + "\\" + fileName));
-                    }
+                        String extension[] = fileName.split("\\.");
 
-                    // nos quedamos solo con el nombre y descartamos el path
-                    File fichero1 = new File(str);
-                    String[] ficheros = fichero1.list();
-                    String aux = "";
-                    if (ficheros == null) {
-                    } else {
-                        for (int i = 0; i < ficheros.length; i++) {
-                            String elementos[] = ficheros[i].split("\\.");
-                            if (!aux.equals("")) {
-                                if (elementos[1].equals("pdf")) {
-                                    aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                        if (!extension[1].equals("pdf")) {
+                            BufferedImage img = new BufferedImage(80, 60, BufferedImage.TYPE_INT_RGB);
+                            img.createGraphics().drawImage(ImageIO.read(fichero).getScaledInstance(80, 60, Image.SCALE_SMOOTH), 0, 0, null);
+                            ImageIO.write(img, "jpg", new File(str2 + "\\" + fileName));
+                        }
+
+                        // nos quedamos solo con el nombre y descartamos el path
+                        File fichero1 = new File(str);
+                        String[] ficheros = fichero1.list();
+                        String aux = "";
+                        if (ficheros == null) {
+                        } else {
+                            for (int i = 0; i < ficheros.length; i++) {
+                                String elementos[] = ficheros[i].split("\\.");
+                                if (!aux.equals("")) {
+                                    if (elementos[1].equals("pdf")) {
+                                        aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    } else {
+                                        aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    }
+
                                 } else {
-                                    aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
-                                }
+                                    if (elementos[1].equals("pdf")) {
+                                        aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    } else {
+                                        aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                    }
 
-                            } else {
-                                if (elementos[1].equals("pdf")) {
-                                    aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
-                                } else {
-                                    aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
                                 }
 
                             }
-
+                            writer.write("{\"files\":[" + aux + "]}");
                         }
-                        writer.write("{\"files\":[" + aux + "]}");
+                        break; // assume we only get one file at a time
                     }
-                    break; // assume we only get one file at a time
+                }
+            } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            } finally {
+                writer.close();
+            }
+        } else {
+            if (tipo.equals("acreditacion")) {
+                Acreditacion r = (Acreditacion) sesion.getAttribute("acreditacion");
+                try {
+                    List<FileItem> items = uploadHandler.parseRequest(request);
+                    for (FileItem item : items) {
+                        if (!item.isFormField()) {
+
+                            FileItem actual = null;
+                            actual = item;
+                            String fileName = actual.getName();
+                            String str = request.getSession().getServletContext().getRealPath("/file2/");
+                            String str2 = request.getSession().getServletContext().getRealPath("/thumbnails/");
+
+                            fileName = "" + r.getIdacreditacion()+ "-" + fileName;
+                            // nos quedamos solo con el nombre y descartamos el path
+                            File fichero = new File(str + "\\" + fileName);
+
+                            // escribimos el fichero colgando del nuevo path
+                            actual.write(fichero);
+
+                            String extension[] = fileName.split("\\.");
+
+                            if (!extension[1].equals("pdf")) {
+                                BufferedImage img = new BufferedImage(80, 60, BufferedImage.TYPE_INT_RGB);
+                                img.createGraphics().drawImage(ImageIO.read(fichero).getScaledInstance(80, 60, Image.SCALE_SMOOTH), 0, 0, null);
+                                ImageIO.write(img, "jpg", new File(str2 + "\\" + fileName));
+                            }
+
+                            // nos quedamos solo con el nombre y descartamos el path
+                            File fichero1 = new File(str);
+                            String[] ficheros = fichero1.list();
+                            String aux = "";
+                            if (ficheros == null) {
+                            } else {
+                                for (int i = 0; i < ficheros.length; i++) {
+                                    String elementos[] = ficheros[i].split("\\.");
+                                    if (!aux.equals("")) {
+                                        if (elementos[1].equals("pdf")) {
+                                            aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                        } else {
+                                            aux += ",{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                        }
+
+                                    } else {
+                                        if (elementos[1].equals("pdf")) {
+                                            aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + "pdf2.png" + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                        } else {
+                                            aux += "{\"name\":\"" + ficheros[i] + "\",\"size\":\"" + 2000 + "\",\"url\":\"/registrosW/file2/" + ficheros[i] + "\",\"thumbnailUrl\":\"/registrosW/thumbnails/" + ficheros[i] + "\",\"deleteUrl\":\"/registrosW/Subir?file2=" + ficheros[i] + "\",\"deleteType\":\"DELETE\",\"type\":\"" + elementos[1] + "\"}";
+                                        }
+
+                                    }
+
+                                }
+                                writer.write("{\"files\":[" + aux + "]}");
+                            }
+                            break; // assume we only get one file at a time
+                        }
+                    }
+                } catch (FileUploadException e) {
+                    throw new RuntimeException(e);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    writer.close();
                 }
             }
-        } catch (FileUploadException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            writer.close();
         }
+
     }
 }

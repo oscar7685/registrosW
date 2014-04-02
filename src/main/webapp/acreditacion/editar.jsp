@@ -165,7 +165,7 @@
 
 
             <br/>           
-            <form id="fileupload" action="Subir" method="POST" enctype="multipart/form-data">
+            <form id="fileupload" action="Subir?tipo=acreditacion" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Anexos</legend>
                     <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -267,14 +267,14 @@
     <td>
     <span class="preview">
     {% if (file.thumbnailUrl) { %}
-    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+    <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" ><img src="{%=file.thumbnailUrl%}"></a>
     {% } %}
     </span>
     </td>
     <td>
     <p class="name">
     {% if (file.url) { %}
-    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+    <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" >{%=file.name%}</a>
     {% } else { %}
     <span>{%=file.name%}</span>
     {% } %}
@@ -338,4 +338,4 @@
 <!-- The File Upload user interface plugin -->
 <script src="js/jquery.fileupload-ui.js"></script>
 <!-- The main application script -->
-<script src="js/main11.js"></script>
+<script src="js/main12.js"></script>

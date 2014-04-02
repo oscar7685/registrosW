@@ -18,7 +18,7 @@ $(function() {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'Subir?tipo=registro',
+        url: 'Subir?tipo=acreditacion',
         acceptFileTypes: /(\.|\/)(gif|jpg|png|pdf)$/i,
         previewFileTypes: /^.*\/(gif|jpeg|png|pdf|PDF)$/
 

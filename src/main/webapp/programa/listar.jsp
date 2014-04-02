@@ -17,6 +17,13 @@
 </style>
 <script type="text/javascript">
     $(function() {
+        $('.popov').popover({
+            placement: "right",
+            container: "body",
+            trigger:"hover",
+            title: "Tiempo restante para el vencimiento"
+            
+        });
         $('.espera').tooltip({
             placement: "top",
             container: "body",
@@ -98,15 +105,16 @@
                                             <!--fecha de vencimiento-->
                                             <c:choose>
                                                 <c:when test="${row.comparar(row.getUltimoRegistro().fechaVencimiento,fechaActual)  && row.getUltimoRegistro().radicacion==null}">
-                                                    <td class="grave2">
+                                                    <td class="grave2 popov" data-content="${row.getUltimoRegistro().DiferenciaEnDiasMesesYAnos()}">
                                                         <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimoRegistro().fechaVencimiento}' />    
                                                     </c:when>
                                                     <c:when test="${row.comparar(row.getUltimoRegistro().fechaVencimiento,fechaActual)  && row.getUltimoRegistro().radicacion!=null}">
-                                                    <td class="espera">
+                                                    <td class="espera popov" data-content="${row.getUltimoRegistro().DiferenciaEnDiasMesesYAnos()}">
                                                         <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimoRegistro().fechaVencimiento}' />    
+                                                        
                                                     </c:when>        
                                                     <c:otherwise>
-                                                    <td>
+                                                    <td class="popov" data-content="${row.getUltimoRegistro().DiferenciaEnDiasMesesYAnos()}">
                                                         <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimoRegistro().fechaVencimiento}' />    
                                                     </c:otherwise>
                                                 </c:choose>
@@ -251,15 +259,15 @@
                                                     <!--fecha de vencimiento-->
                                                     <c:choose>
                                                         <c:when test="${row.comparar(row.acreditacionList.get(0).fechaVencimiento,fechaActual)  && row.acreditacionList.get(0).radicacion==null}">
-                                                            <td class="grave2">
+                                                            <td class="grave2 popov"  data-content="${row.acreditacionList.get(0).DiferenciaEnDiasMesesYAnos()}">
                                                                 <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaVencimiento}' />    
                                                             </c:when>
                                                             <c:when test="${row.comparar(row.acreditacionList.get(0).fechaVencimiento,fechaActual)  && row.acreditacionList.get(0).radicacion!=null}">
-                                                            <td class="espera">
+                                                            <td class="espera popov"  data-content="${row.acreditacionList.get(0).DiferenciaEnDiasMesesYAnos()}">
                                                                 <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaVencimiento}' />    
                                                             </c:when>        
                                                             <c:otherwise>
-                                                            <td>
+                                                            <td class="popov" data-content="${row.acreditacionList.get(0).DiferenciaEnDiasMesesYAnos()}">
                                                                 <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaVencimiento}' />    
                                                             </c:otherwise>
                                                         </c:choose>

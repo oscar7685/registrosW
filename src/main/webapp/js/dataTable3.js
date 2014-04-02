@@ -135,6 +135,7 @@ var asInitVals = new Array();
 $(document).ready(function() {
     var oTable = $('#tablaX2').dataTable({
         "sPaginationType": "bootstrap",
+        "bSort": false,
         "oLanguage": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -153,16 +154,12 @@ $(document).ready(function() {
                 "sLast": "Último",
                 "sNext": "Siguiente",
                 "sPrevious": "Anterior"
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-
-
+            
         }
     });
-
+    
+     oTable.fnSort(  [[2,'asc'] ] );
     $("#tablaX2 thead input").keyup(function() {
         /* Filter on the column (the index) of this element */
         oTable.fnFilter(this.value, $("#tablaX2 thead input").index(this));
@@ -171,6 +168,7 @@ $(document).ready(function() {
     var oTable2 = $('#tablaX3').dataTable({
         "iDisplayLength": 25,
         "sPaginationType": "bootstrap",
+        "bSort": false,
         "oLanguage": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -189,16 +187,13 @@ $(document).ready(function() {
                 "sLast": "Último",
                 "sNext": "Siguiente",
                 "sPrevious": "Anterior"
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
+            
 
 
         }
     });
-
+    oTable2.fnSort(  [[2,'asc'] ] );
     $("#tablaX3 thead input").keyup(function() {
         /* Filter on the column (the index) of this element */
         oTable2.fnFilter(this.value, $("#tablaX3 thead input").index(this));
