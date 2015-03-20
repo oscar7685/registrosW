@@ -252,47 +252,47 @@
 
                                                     </td>
                                                     <td> 
-                                                        <a href="#editarAcreditacion&${row.acreditacionList.get(0).idacreditacion}" title="Editar Acreditación">${row.acreditacionList.get(0).resolucion}</a>
+                                                        <a href="#editarAcreditacion&${row.getUltimaAcreditacion().idacreditacion}" title="Editar Acreditación">${row.getUltimaAcreditacion().resolucion}</a>
                                                     </td>
 
-                                                    <fmt:formatDate value="${row.acreditacionList.get(0).fechaVencimiento}" pattern="yyyy/MM/dd" var="vencimiento" />
+                                                    <fmt:formatDate value="${row.getUltimaAcreditacion().fechaVencimiento}" pattern="yyyy/MM/dd" var="vencimiento" />
                                                     <!--fecha de vencimiento-->
                                                     <c:choose>
-                                                        <c:when test="${row.comparar(row.acreditacionList.get(0).fechaVencimiento,fechaActual)  && row.acreditacionList.get(0).radicacion==null}">
-                                                            <td class="grave2 popov"  data-content="${row.acreditacionList.get(0).DiferenciaEnDiasMesesYAnos()}">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaVencimiento}' />    
+                                                        <c:when test="${row.comparar(row.getUltimaAcreditacion().fechaVencimiento,fechaActual)  && row.getUltimaAcreditacion().radicacion==null}">
+                                                            <td class="grave2 popov"  data-content="${row.getUltimaAcreditacion().DiferenciaEnDiasMesesYAnos()}">
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaVencimiento}' />    
                                                             </c:when>
-                                                            <c:when test="${row.comparar(row.acreditacionList.get(0).fechaVencimiento,fechaActual)  && row.acreditacionList.get(0).radicacion!=null}">
-                                                            <td class="espera popov"  data-content="${row.acreditacionList.get(0).DiferenciaEnDiasMesesYAnos()}">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaVencimiento}' />    
+                                                            <c:when test="${row.comparar(row.getUltimaAcreditacion().fechaVencimiento,fechaActual)  && row.getUltimaAcreditacion().radicacion!=null}">
+                                                            <td class="espera popov"  data-content="${row.getUltimaAcreditacion().DiferenciaEnDiasMesesYAnos()}">
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaVencimiento}' />    
                                                             </c:when>        
                                                             <c:otherwise>
-                                                            <td class="popov" data-content="${row.acreditacionList.get(0).DiferenciaEnDiasMesesYAnos()}">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaVencimiento}' />    
+                                                            <td class="popov" data-content="${row.getUltimaAcreditacion().DiferenciaEnDiasMesesYAnos()}">
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaVencimiento}' />    
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
                                                     <!--primera autoevaluacion--->
-                                                    <fmt:formatDate value="${row.acreditacionList.get(0).finaUno}" pattern="yyyy/MM/dd" var="final11" />
-                                                    <fmt:formatDate value="${row.acreditacionList.get(0).inicioUno}" pattern="yyyy/MM/dd" var="inicio11" />
-                                                    <fmt:formatDate value="${row.acreditacionList.get(0).fechaPrimeraAutoevaluacion()}" pattern="yyyy/MM/dd" var="fechaLimite11" />
+                                                    <fmt:formatDate value="${row.getUltimaAcreditacion().finaUno}" pattern="yyyy/MM/dd" var="final11" />
+                                                    <fmt:formatDate value="${row.getUltimaAcreditacion().inicioUno}" pattern="yyyy/MM/dd" var="inicio11" />
+                                                    <fmt:formatDate value="${row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion()}" pattern="yyyy/MM/dd" var="fechaLimite11" />
 
                                                     <c:choose>
-                                                        <c:when test="${row.comparar(row.acreditacionList.get(0).fechaPrimeraAutoevaluacion(),fechaActual) && inicio11==null }">
+                                                        <c:when test="${row.comparar(row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion(),fechaActual) && inicio11==null }">
                                                             <td class="grave">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaPrimeraAutoevaluacion()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion()}' />
                                                             </c:when>
-                                                            <c:when test="${row.comparar(row.acreditacionList.get(0).fechaPrimeraAutoevaluacion(),fechaActual) && final11!=null }">
+                                                            <c:when test="${row.comparar(row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion(),fechaActual) && final11!=null }">
                                                             <td class="bien">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaPrimeraAutoevaluacion()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion()}' />
                                                             </c:when>
-                                                            <c:when test="${row.comparar(row.acreditacionList.get(0).fechaPrimeraAutoevaluacion(),fechaActual) && inicio11!=null  && final1==null }">
+                                                            <c:when test="${row.comparar(row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion(),fechaActual) && inicio11!=null  && final1==null }">
                                                             <td class="naranja">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaPrimeraAutoevaluacion()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion()}' />
                                                             </c:when>    
                                                             <c:otherwise>
                                                             <td>
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).fechaPrimeraAutoevaluacion()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().fechaPrimeraAutoevaluacion()}' />
                                                             </c:otherwise>
                                                         </c:choose>
 
@@ -300,34 +300,34 @@
 
                                                     <!--presentacion en la oficina de autoevaluacion-->
                                                     <c:choose>
-                                                        <c:when test="${row.comparar(row.acreditacionList.get(0).unAnioAntes(),fechaActual) && row.acreditacionList.get(0).presentacionAuto==null}">
+                                                        <c:when test="${row.comparar(row.getUltimaAcreditacion().unAnioAntes(),fechaActual) && row.getUltimaAcreditacion().presentacionAuto==null}">
                                                             <td class="grave2">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).unAnioAntes()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().unAnioAntes()}' />
                                                             </c:when>
-                                                            <c:when test="${row.acreditacionList.get(0).presentacionAuto!=null}">
+                                                            <c:when test="${row.getUltimaAcreditacion().presentacionAuto!=null}">
                                                             <td class="bien">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).unAnioAntes()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().unAnioAntes()}' />
                                                             </c:when>
-                                                            <c:when test="${row.comparar(fechaActual,row.acreditacionList.get(0).unAnioAntes())}">
+                                                            <c:when test="${row.comparar(fechaActual,row.getUltimaAcreditacion().unAnioAntes())}">
                                                             <td>
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).unAnioAntes()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().unAnioAntes()}' />
                                                             </c:when>    
                                                         </c:choose>
 
                                                     </td>
                                                     <!--presentacion en la oficina de autoevaluacion-->
                                                     <c:choose>
-                                                        <c:when test="${row.comparar(row.acreditacionList.get(0).diezMesesAntes(),fechaActual) && row.acreditacionList.get(0).radicacion==null}">
+                                                        <c:when test="${row.comparar(row.getUltimaAcreditacion().diezMesesAntes(),fechaActual) && row.getUltimaAcreditacion().radicacion==null}">
                                                             <td class="grave2">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).diezMesesAntes()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().diezMesesAntes()}' />
                                                             </c:when>
-                                                            <c:when test="${row.acreditacionList.get(0).radicacion!=null}">
+                                                            <c:when test="${row.getUltimaAcreditacion().radicacion!=null}">
                                                             <td class="bien">
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).diezMesesAntes()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().diezMesesAntes()}' />
                                                             </c:when>
-                                                            <c:when test="${row.comparar(fechaActual,row.acreditacionList.get(0).diezMesesAntes())}">
+                                                            <c:when test="${row.comparar(fechaActual,row.getUltimaAcreditacion().diezMesesAntes())}">
                                                             <td>
-                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.acreditacionList.get(0).diezMesesAntes()}' />
+                                                                <fmt:formatDate pattern='yyyy/MM/dd' value='${row.getUltimaAcreditacion().diezMesesAntes()}' />
                                                             </c:when>    
                                                         </c:choose>
 

@@ -90,6 +90,20 @@ public class Programa implements Serializable {
             return r;
         }
     }
+    
+    public Acreditacion getUltimaAcreditacion() {
+        if (this.getAcreditacionList().isEmpty()) {
+            return null;
+        } else {
+            Acreditacion a = this.getAcreditacionList().get(0);
+            for (Acreditacion acreditacion : acreditacionList) {
+                if (acreditacion.getFechaInicio().after(a.getFechaInicio())) {
+                    a = acreditacion;
+                }
+            }
+            return a;
+        }
+    }
 
     public String getNombre() {
         return nombre;
